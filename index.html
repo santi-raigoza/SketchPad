@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sketch Pad</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="main">
@@ -14,6 +15,9 @@
         </div>
         <div class="content">
             <div class="menu" id="left-menu">
+                <label for="color-input" class="label">Select a color:</label>
+                <input type="color" id="color-input" name="color-input" value="#ffffff">
+                <button class="eraser-icon"><i class="fa-solid fa-eraser"></i></button>
                 
             </div>
             <div class="sketch-pad">
@@ -21,7 +25,7 @@
 
             </div>
             <div class="menu" id="right-menu">
-                <label for="grid-size" class="size-label">Change the grid size (16-100):</label>
+                <label for="grid-size" class="label">Change the grid size (16-100):</label>
                 <div class="grid-size-container">
                     <input type="number" id="grid-size" name="grid-size" min="10" max="100" required>
                     <button class="set-button">Set</button>

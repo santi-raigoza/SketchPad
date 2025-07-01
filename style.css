@@ -52,7 +52,7 @@ html {
     flex: 0.2;
 }
 
-.size-label {
+.label {
     font-size: 30px;
     padding-top: 50px;
 }
@@ -60,7 +60,7 @@ html {
 .grid-size-container {
     display: flex;
     gap: 10px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .set-button,
@@ -84,14 +84,32 @@ html {
     border: 3px solid #9aaaf0;
     border-radius: 5px;
     padding: 0px 10px;
+    font-family: inherit;
+    color: #9aaaf0;
 }
 
 #grid-size:focus {
     outline: none;
 }
 
-/* input types needed:
-type=color
-type=image
-type=number
-type=button */
+#color-input {
+    border: none;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+    height: 40px;
+    width: 80px;
+}
+
+.eraser-icon {
+    background: none;
+    border: none;
+    font-size: 100px;
+    color: #9aaaf0;
+    cursor: pointer;
+    padding-top: 20px;
+}
+
+.eraser-icon:hover {
+    opacity: 50%;
+}
