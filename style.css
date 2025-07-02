@@ -59,7 +59,6 @@ html {
 }
 
 .border-grid-box {
-    flex: 1;
     border: 1px solid black;
 }
 
