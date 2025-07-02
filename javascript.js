@@ -4,8 +4,9 @@ const inputColor = document.querySelector("#color-input");
 const borderCheckBox = document.querySelector("#check-box");
 const eraser = document.querySelector(".eraser-icon");
 const clearCanvas = document.querySelector(".clear-canvas-button");
+const gridSizeInput = document.querySelector("#grid-size");
 
-const gridSize = 10;
+let gridSize = 10; // default 10x10
 let currentColor = "#bccff3"; //default color
 let erase = false;
 let isMouseDown = false;
@@ -28,7 +29,12 @@ borderCheckBox.addEventListener("change", borderChange)
 eraser.addEventListener("click", eraseBox);
 clearCanvas.addEventListener("click", clearGrid);
 
+gridSizeInput.addEventListener("change", () => {
+    changeGridSize(gridSizeInput.value);
+});
+
 function createGrid() {
+    console.log
     for (let i = 0; i < gridSize; i++) {
         const newGridRow = document.createElement("div");
         newGridRow.classList.add("grid-row");
@@ -86,4 +92,9 @@ function clearGrid() {
     sketchPad.innerHTML = "";
     createGrid();
     borderChange();
+}
+
+function changeGridSize(size) {
+    gridSize = size;
+    clearGrid();
 }
