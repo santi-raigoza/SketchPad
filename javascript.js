@@ -3,25 +3,37 @@ const sketchPad = document.querySelector(".sketch-pad");
 const inputColor = document.querySelector("#color-input");
 const borderCheckBox = document.querySelector("#check-box");
 const eraser = document.querySelector(".eraser-icon");
+const clearCanvas = document.querySelector(".clear-canvas-button");
 
-const defaultGridSize = 10;
+const gridSize = 10;
 let currentColor = "#bccff3"; //default color
 let erase = false;
+let isMouseDown = false;
 
 document.addEventListener("DOMContentLoaded", createGrid);
 
-sketchPad.addEventListener("click", colorBox);
+sketchPad.addEventListener("mousedown", (e) => {
+    isMouseDown = true;
+    e.preventDefault();
+    colorBox(e);
+});
+
+sketchPad.addEventListener("mouseup", () => {
+    isMouseDown = false;
+});
+
+sketchPad.addEventListener("mouseover", colorBox);
 inputColor.addEventListener("input", colorChange);
 borderCheckBox.addEventListener("change", borderChange)
 eraser.addEventListener("click", eraseBox);
-
+clearCanvas.addEventListener("click", clearGrid);
 
 function createGrid() {
-    for (let i = 0; i < defaultGridSize; i++) {
+    for (let i = 0; i < gridSize; i++) {
         const newGridRow = document.createElement("div");
         newGridRow.classList.add("grid-row");
         sketchPad.appendChild(newGridRow);
-        for (let j = 0; j < defaultGridSize; j++) {
+        for (let j = 0; j < gridSize; j++) {
             const newGridBox = document.createElement("div");
             newGridBox.classList.add("grid-box");
             newGridRow.appendChild(newGridBox);
@@ -30,12 +42,16 @@ function createGrid() {
 }
 
 function colorBox(e) {
-    currentGridBox = e.target;
-    
-    if (erase) {
-        currentGridBox.style.backgroundColor = "#ffffff";
-    } else {
-        currentGridBox.style.backgroundColor = currentColor;
+    if (isMouseDown) {
+        if (e.target.classList.contains("grid-box")) {
+            currentGridBox = e.target;
+            
+            if (erase) {
+                currentGridBox.style.backgroundColor = "#ffffff";
+            } else {
+                currentGridBox.style.backgroundColor = currentColor;
+            }
+        }
     }
 }
 
@@ -46,7 +62,7 @@ function colorChange() {
 
 function borderChange() {
     const boxes = document.querySelectorAll(".grid-box");
-
+    
     boxes.forEach(box => {
         if (borderCheckBox.checked) {
             box.classList.add("border-grid-box");
@@ -64,4 +80,10 @@ function eraseBox() {
         erase = true;
         eraser.style.opacity = "0.7";
     }
+}
+
+function clearGrid() {
+    sketchPad.innerHTML = "";
+    createGrid();
+    borderChange();
 }
