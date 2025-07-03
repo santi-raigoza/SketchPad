@@ -5,6 +5,7 @@ const borderCheckBox = document.querySelector("#check-box");
 const eraser = document.querySelector(".eraser-icon");
 const clearCanvas = document.querySelector(".clear-canvas-button");
 const gridSizeInput = document.querySelector("#grid-size");
+const saveButton = document.querySelector(".save-button");
 
 let gridSize = 10; // default 10x10
 let currentColor = "#bccff3"; //default color
@@ -33,8 +34,9 @@ gridSizeInput.addEventListener("change", () => {
     changeGridSize(gridSizeInput.value);
 });
 
+saveButton.addEventListener("click", saveImage);
+
 function createGrid() {
-    console.log
     for (let i = 0; i < gridSize; i++) {
         const newGridRow = document.createElement("div");
         newGridRow.classList.add("grid-row");
@@ -97,4 +99,13 @@ function clearGrid() {
 function changeGridSize(size) {
     gridSize = size;
     clearGrid();
+}
+
+function saveImage() {
+    html2canvas(document.querySelector(".sketch-pad")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "my-sketch.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    });
 }
